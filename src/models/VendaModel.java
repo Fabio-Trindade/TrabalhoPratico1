@@ -1,7 +1,10 @@
 package models;
 
 import models.entidades.Endereco;
+import models.entidades.ProdutoVendido;
+import models.entidades.Status;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -10,17 +13,20 @@ public class VendaModel {
     private final int idVenda;
     private final ClienteModel cliente;
     private final Endereco endereco;
-    private final Date data;
+    private final String dataInicial;
+    private String dataFinal;
     private Status status;
     List<ProdutoVendido> produtosVendidos;
 
-    VendaModel(ClienteModel cliente,Endereco endereco,Date data,Status status,List<ProdutoVendido> produtosVendidos){
+    public VendaModel(ClienteModel cliente,Endereco endereco,
+                      String dataInicial,Status status,List<ProdutoVendido> produtosVendidos){
         this.cliente=cliente;
         this.produtosVendidos=produtosVendidos;
         this.status=status;
         this.endereco=endereco;
-        this.data=data;
+        this.dataInicial=dataInicial;
         this.idVenda=idVendaGlobal;
+        dataFinal=null;
         idVendaGlobal++;
     }
 
@@ -37,8 +43,8 @@ public class VendaModel {
         return endereco;
     }
 
-    public Date getData() {
-        return data;
+    public String getData() {
+        return dataInicial;
     }
 
     public Status getStatus() {
@@ -48,46 +54,13 @@ public class VendaModel {
     public void setStatus(Status status) {
         this.status = status;
     }
-}
 
-class ProdutoVendido{
-    private final ProdutoModel produto;
-    private final int quantidade;
-
-    ProdutoVendido(ProdutoModel produto, int quantidade){
-        this.produto = produto;
-        this.quantidade = quantidade;
+    public String getDatainicial() {
+        return dataFinal;
     }
 
-    public ProdutoModel getProduto() {
-        return produto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
+    public void setDatainicial(String dataFinal) {
+        this.dataFinal = dataFinal;
     }
 }
 
-enum Status{
-    PENDENTE("Pendente",0),
-    EM_ANDAMENTO("Em andamento",1),
-    ENTREGUE("Entregue",2);
-
-    private final String status;
-    private final int codigo;
-
-    Status(String status, int codigo) {
-        this.codigo=codigo;
-        this.status=status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-
-}

@@ -1,27 +1,25 @@
-package views.cadastrarClienteView;
-
+package views.alterarClienteView;
 
 import controllers.ClienteController;
 import javafx.geometry.Insets;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.MainController;
-import models.ClienteModel;
 import models.entidades.Endereco;
+import views.cadastrarClienteView.CadastrarClienteViewController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class CadastrarClienteViewController {
-
+public class AlterarClienteViewController {
     int contadorEnderecos=0;
     List<Endereco> enderecos= new ArrayList<Endereco>();
-    private CadastrarClienteViewController(){}
+    private AlterarClienteViewController(){}
 
-    private  static final CadastrarClienteViewController controller = new CadastrarClienteViewController();
+    private  static final AlterarClienteViewController controller = new AlterarClienteViewController();
 
-    public static CadastrarClienteViewController getInstance(){
+    public static AlterarClienteViewController getInstance(){
         return controller;
 
     }
@@ -37,7 +35,11 @@ public class CadastrarClienteViewController {
 
     public javafx.scene.control.Label labelSenha= new javafx.scene.control.Label("Senha");
     public javafx.scene.control.TextField textFieldSenha = new javafx.scene.control.TextField();
-
+    public javafx.scene.control.Label  labelNomeCliente=
+            new javafx.scene.control.Label("Insira o cpf do cliente (somente números)");
+    public javafx.scene.control.Button botaoProcurarCliente=
+            new  javafx.scene.control.Button("Adicionar cliente");
+    public javafx.scene.control.TextField textFieldProcurarCliente= new TextField();
     public javafx.scene.control.Label labelRua= new javafx.scene.control.Label("Rua");
     public javafx.scene.control.TextField textFieldRua = new javafx.scene.control.TextField();
     public javafx.scene.control.Label labelBairro= new javafx.scene.control.Label("Bairro");
@@ -65,6 +67,7 @@ public class CadastrarClienteViewController {
         box.setSpacing(8);
         box.setPadding(new Insets(10));
     }
+
 
     public void clear(){
         textFieldEmail.clear();
@@ -95,15 +98,15 @@ public class CadastrarClienteViewController {
 
             if(clienteController.dadosSaoValidos(nome,email,senha,cpf) && !enderecos.isEmpty()){
 
-                 if(clienteController.analisarCpfEEmail(cpf,email)){
-                     clienteController.cadastrarCliente(cpf,email,senha,nome,enderecos);
-                     labelErro.setText("OK");
-                     MainController.windows.setScene(MainController.menuView);
-                     clear();
+                if(clienteController.analisarCpfEEmail(cpf,email)){
+                    clienteController.cadastrarCliente(cpf,email,senha,nome,enderecos);
+                    labelErro.setText("OK");
+                    MainController.windows.setScene(MainController.menuView);
+                    clear();
 
                 }else{
-                     labelErro.setText("CPF ou email já existem");
-                 }
+                    labelErro.setText("CPF ou email já existem");
+                }
 
             }else{
                 labelErro.setText("Verifique se os dados foram inseridos ou se foram inserido corretamente.");
@@ -139,7 +142,4 @@ public class CadastrarClienteViewController {
         });
 
     }
-
-
-
 }
