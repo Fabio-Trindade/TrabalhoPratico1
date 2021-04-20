@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.MainController;
+import models.ClienteModel;
 import models.entidades.Endereco;
 import views.cadastrarClienteView.CadastrarClienteViewController;
 
@@ -13,9 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlterarClienteViewController {
-    int contadorEnderecos=0;
-    List<Endereco> enderecos= new ArrayList<Endereco>();
     private AlterarClienteViewController(){}
+    int contador=0;
 
     private  static final AlterarClienteViewController controller = new AlterarClienteViewController();
 
@@ -23,8 +23,11 @@ public class AlterarClienteViewController {
         return controller;
 
     }
+    ClienteModel cliente;
 
     public javafx.scene.control.Label labelCPF= new javafx.scene.control.Label("CPF(Somente números)");
+    public javafx.scene.control.Label labelClienteFoiencontrado=
+            new javafx.scene.control.Label("");
     public javafx.scene.control.TextField textFieldCPF = new javafx.scene.control.TextField();
 
     public javafx.scene.control.Label labelNome= new javafx.scene.control.Label("Nome");
@@ -35,25 +38,13 @@ public class AlterarClienteViewController {
 
     public javafx.scene.control.Label labelSenha= new javafx.scene.control.Label("Senha");
     public javafx.scene.control.TextField textFieldSenha = new javafx.scene.control.TextField();
-    public javafx.scene.control.Label  labelNomeCliente=
-            new javafx.scene.control.Label("Insira o cpf do cliente (somente números)");
-    public javafx.scene.control.Button botaoProcurarCliente=
-            new  javafx.scene.control.Button("Adicionar cliente");
-    public javafx.scene.control.TextField textFieldProcurarCliente= new TextField();
-    public javafx.scene.control.Label labelRua= new javafx.scene.control.Label("Rua");
-    public javafx.scene.control.TextField textFieldRua = new javafx.scene.control.TextField();
-    public javafx.scene.control.Label labelBairro= new javafx.scene.control.Label("Bairro");
-    public javafx.scene.control.TextField textFieldBairro = new javafx.scene.control.TextField();
-    public javafx.scene.control.Label labelNumero= new javafx.scene.control.Label("Numero(Número inteiro)");
-    public javafx.scene.control.TextField textFieldNumero = new javafx.scene.control.TextField();
-    public javafx.scene.control.Label labelQtdEnderecosCadastrados=
-            new javafx.scene.control.Label("0 endereços cadastrados (é necessário pelo menos um endereço)");
 
 
-    public javafx.scene.control.Button botaoCadastrar=
-            new javafx.scene.control.Button("Cadastrar cliente");
-    public javafx.scene.control.Button botaoCadastrarEndereco=
-            new javafx.scene.control.Button("Adicionar endereço");
+
+
+
+    public javafx.scene.control.Button botaoAlterarCliente=
+            new javafx.scene.control.Button("Procurar cliente");
     public javafx.scene.control.Button botaoVoltar=
             new javafx.scene.control.Button("Voltar");
 
@@ -70,76 +61,72 @@ public class AlterarClienteViewController {
 
 
     public void clear(){
+
         textFieldEmail.clear();
         textFieldCPF.clear();
         textFieldNome.clear();
         textFieldSenha.clear();
-        contadorEnderecos=0;
-        enderecos.clear();
         labelErro.setText("");
-        labelQtdEnderecosCadastrados.setText("0 endereços cadastrados (é necessário pelo menos um endereço)");
-        clearEndereco();
+        botaoAlterarCliente.setText("Procurar cliente");
+        labelClienteFoiencontrado.setText("");
+
+        contador=0;
 
 
     }
-    public void clearEndereco(){
-        textFieldBairro.clear();
-        textFieldNumero.clear();
-        textFieldRua.clear();
-    }
+
 
     public void initButtons(){
-        botaoCadastrar.setOnAction(e->{
-            ClienteController clienteController = new ClienteController();
-            String nome = textFieldNome.getText();
-            String email= textFieldEmail.getText();
-            String senha = textFieldSenha.getText();
-            String cpf= textFieldCPF.getText();
 
-            if(clienteController.dadosSaoValidos(nome,email,senha,cpf) && !enderecos.isEmpty()){
 
-                if(clienteController.analisarCpfEEmail(cpf,email)){
-                    clienteController.cadastrarCliente(cpf,email,senha,nome,enderecos);
-                    labelErro.setText("OK");
-                    MainController.windows.setScene(MainController.menuView);
+        botaoAlterarCliente.setOnAction(e->{
+            if(contador==0){
+                String cpf=textFieldCPF.getText();
+                ClienteController cController=new ClienteController();
+
+                if (cController.cpfEhValido(cpf)){
+                    cliente=cController.procurarClientePorCPF(cpf);
+                    if(cliente==null){
+                        labelClienteFoiencontrado.setText("Cliente não foi encontrado");
+                    }else{
+                        textFieldEmail.setText(cliente.getEmail());
+                        textFieldNome.setText(cliente.getNome());
+                        textFieldSenha.setText(cliente.getSenha());
+                        botaoAlterarCliente.setText("Alterar cliente");
+                        labelClienteFoiencontrado.setText("");
+                        contador++;
+
+                    }
+                }else{
+                    labelClienteFoiencontrado.setText("cpf inválido");
+                }
+            }else{
+                String nome= textFieldNome.getText();
+                String senha=textFieldSenha.getText();
+                String email=textFieldEmail.getText();
+                ClienteController clienteController=new ClienteController();
+                if(clienteController.dadosAlterarCadastroSaoValidos(nome,email,senha)){
+                    clienteController.alterarCliente(nome,senha,email,cliente);
                     clear();
+                    MainController.windows.setScene(MainController.menuView);
 
                 }else{
-                    labelErro.setText("CPF ou email já existem");
+
+                    labelErro.setText("Insira os dados");
+
                 }
 
-            }else{
-                labelErro.setText("Verifique se os dados foram inseridos ou se foram inserido corretamente.");
             }
 
         });
 
         botaoVoltar.setOnAction(e->{
             clear();
-
             MainController.windows.setScene(MainController.menuView);
 
         });
 
-        botaoCadastrarEndereco.setOnAction(e->{
-            ClienteController clienteController = new ClienteController();
 
-            String rua=textFieldRua.getText();
-            String bairro= textFieldBairro.getText();
-            String numero = textFieldNumero.getText();
-            if(clienteController.dadosSaoValidos(rua,bairro,numero)){
-                int num =Integer.parseInt(numero);
-                Endereco endereco= new Endereco(rua,bairro,num);
-                enderecos.add(endereco);
-                contadorEnderecos++;
-                labelQtdEnderecosCadastrados.setText(contadorEnderecos + " endereço(s) cadastrado(s)");
-                clearEndereco();
-
-            }else{
-                labelErro.setText("Verifique se os dados foram inseridos ou se foram inserido corretamente.");
-            }
-
-        });
 
     }
 }

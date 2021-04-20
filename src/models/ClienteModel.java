@@ -9,7 +9,7 @@ public class ClienteModel {
     private static int idClienteGlobal=0;
     private final int idCliente;
     private final String cpf;
-    private final String nome;
+    private  String nome;
     private String email;
     private String senha;
     private List<Endereco> enderecos;
@@ -31,6 +31,7 @@ public class ClienteModel {
     public String getNome() {
         return nome;
     }
+    public void setNome(String nome) { this.nome=nome; }
 
     public String getEmail() {
         return email;

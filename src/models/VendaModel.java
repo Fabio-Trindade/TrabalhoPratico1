@@ -14,9 +14,8 @@ public class VendaModel {
     private final ClienteModel cliente;
     private final Endereco endereco;
     private final String dataInicial;
-    private String dataFinal;
     private Status status;
-    List<ProdutoVendido> produtosVendidos;
+    private List<ProdutoVendido> produtosVendidos;
 
     public VendaModel(ClienteModel cliente,Endereco endereco,
                       String dataInicial,Status status,List<ProdutoVendido> produtosVendidos){
@@ -26,7 +25,6 @@ public class VendaModel {
         this.endereco=endereco;
         this.dataInicial=dataInicial;
         this.idVenda=idVendaGlobal;
-        dataFinal=null;
         idVendaGlobal++;
     }
 
@@ -55,12 +53,14 @@ public class VendaModel {
         this.status = status;
     }
 
-    public String getDatainicial() {
-        return dataFinal;
+
+
+    public List<ProdutoVendido> getProdutosVendidos() {
+        return produtosVendidos;
     }
 
-    public void setDatainicial(String dataFinal) {
-        this.dataFinal = dataFinal;
+    public void setProdutosVendidos(List<ProdutoVendido> produtosVendidos) {
+        this.produtosVendidos = produtosVendidos;
     }
 }
 

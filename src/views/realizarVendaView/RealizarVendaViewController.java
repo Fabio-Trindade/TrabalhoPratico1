@@ -23,12 +23,13 @@ import java.util.List;
 
 public class RealizarVendaViewController {
     private static  final RealizarVendaViewController realizarVendaViewController = new RealizarVendaViewController();
-    private RealizarVendaViewController(){}
+    private RealizarVendaViewController(){
+    }
     public static RealizarVendaViewController getInstance(){
         return realizarVendaViewController;
     }
 
-    List<ProdutoVendido> produtos= new ArrayList<ProdutoVendido>();
+    List<ProdutoVendido> produtos=new ArrayList<>();
     ClienteModel cliente=null;
     ProdutoModel produtoModel;
     int qtdProdutosVendidos=0;
@@ -145,7 +146,6 @@ public class RealizarVendaViewController {
                             produtos.add(produtoVendido);
                             qtdProdutosVendidos++;
                             labelQtdProdutosVendidos.setText(qtdProdutosVendidos+" produto(s) adicionado(s)");
-                            produtoModel=null;
                             labelErroAdcionarProduto.setText("");
                             textFieldProcurarProduto.clear();
                             textFieldQuantidade.clear();
@@ -177,6 +177,7 @@ public class RealizarVendaViewController {
                 }else if(produtos.isEmpty()){
                     labelErroVenda.setText("Adicione um produto");
                 }else{
+
                     vendaController.atualizarEstoque(produtos);
                     vendaController.addVenda(cliente,produtos,dia+"/"+mes+"/"+ano, Status.PENDENTE,
                             cliente.getEnderecos().get(Integer.parseInt(textFieldEndereco.getText())));

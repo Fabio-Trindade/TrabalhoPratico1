@@ -22,10 +22,12 @@ public class MenuViewController {
             new javafx.scene.control.Button("Cadastrar produto");
 
 
+
+
     public final javafx.scene.control.Button botaoCadastrarCliente =
             new javafx.scene.control.Button("Cadastrar cliente");
     public final javafx.scene.control.Button botaoRealizarVenda =
-            new javafx.scene.control.Button("RealizarVenda");
+            new javafx.scene.control.Button("Realizar venda");
     public final javafx.scene.control.Button botaoAlterarEstoque =
             new javafx.scene.control.Button("Alterar estoque");
     public final javafx.scene.control.Button botaoAlterarDadosCliente =

@@ -1,10 +1,39 @@
 package controllers;
 
-import models.ClienteModel;
+import models.ProdutoModel;
 import models.ProdutoModel;
 import models.persistencia.BancoDeDadosLocal;
 
 public class ProdutoController {
+    public String mostrarProdutos(){
+        BancoDeDadosLocal bd=BancoDeDadosLocal.getInstance();
+        String str="";
+        ProdutoModel produto;
+        for(int i=0;i<bd.produtos.size();i++){
+            produto=bd.produtos.get(i);
+            str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+"\n";
+        }
+
+        return str;
+    }
+    public String mostrarProdutosFiltrados(String categoria){
+
+        BancoDeDadosLocal bd=BancoDeDadosLocal.getInstance();
+        String str="";
+        ProdutoModel produto;
+        for(int i=0;i<bd.produtos.size();i++){
+            produto=bd.produtos.get(i);
+            if(produto.getCategoria().equals(categoria)){
+                str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+"\n";
+
+            }
+        }
+
+
+
+
+        return str;
+    }
 
     public boolean dadosSaoValidos( String descricao,String categoria,String quantidade,String preco){
         if (descricao.equals("") || categoria.equals("")){
