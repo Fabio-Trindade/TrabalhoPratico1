@@ -8,7 +8,8 @@ public class RealizarVendaView {
     public RealizarVendaView(){}
     public Scene getSceneRealizarVenda(){
         controller.initButtons();
-        Scene scene = new Scene(controller.root);
+        Scene scene = new Scene(controller.root,1000,700);
+
         controller.configVBox();
         controller.box.getChildren().addAll(
                 controller.labelNomeCliente,

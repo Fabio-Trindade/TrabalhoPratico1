@@ -9,7 +9,7 @@ public class MenuView {
     public MenuView(){}
 
     public Scene getSceneMenuView(){
-        Scene scene = new Scene(controller.root,400,600);
+        Scene scene = new Scene(controller.root,1000,700);
         controller.configVbox();
         controller.vBox.getChildren().addAll(
                 controller.labelMenu,
@@ -21,7 +21,8 @@ public class MenuView {
                 controller.botaoAlterarStatusVenda,
                 controller.botaoMostrarClientes,
                 controller.botaoMostrarProdutos,
-                controller.botaoMostrarVendas
+                controller.botaoMostrarVendas,
+                controller.botaoSair
 
         );
         controller.root.getChildren().addAll(controller.vBox);

@@ -7,7 +7,7 @@ public class ListarClienteView {
     ListaCLienteViewController controller= ListaCLienteViewController.getInstance();
 
     public Scene getScene(){
-        Scene scene = new Scene(controller.root,400,600);
+        Scene scene = new Scene(controller.root,1000,700);
         controller.initButtons();
         controller.getClientes();
         controller.configVbox();

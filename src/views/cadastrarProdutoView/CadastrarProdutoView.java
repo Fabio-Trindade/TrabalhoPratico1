@@ -10,7 +10,7 @@ public class CadastrarProdutoView {
     public  CadastrarProdutoView(){}
     public Scene getSceneCadastrarProduto(){
         controller.initButtons();
-        Scene scene = new Scene(controller.root,400,600);
+        Scene scene = new Scene(controller.root,1000,700);
         controller.configVbox();
         controller.vBox.getChildren().addAll(
                 controller.labelDescricao,

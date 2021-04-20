@@ -31,7 +31,7 @@ public class BancoDeDadosLocal {
             clientes.add(new ClienteModel("12345678910","raulyamaguchi@gmail.com",
                     "Raul Yamaguchi","fabio",enderecos));
             produtos.add(new ProdutoModel("Nárnia",30,"DVD",10.0));
-            produtos.add(new ProdutoModel("Estojo",30,"Material escolar",5.0));
+            produtos.add(new ProdutoModel("Estojo",30,"DVD",5.0));
             vendas.add(new VendaModel(clientes.get(0),endereco,"12/12/2000", Status.PENDENTE,produtoVendidos ));
             vendas.add(new VendaModel(clientes.get(1),endereco,"13/12/2000", Status.PENDENTE,produtoVendidos ));
 

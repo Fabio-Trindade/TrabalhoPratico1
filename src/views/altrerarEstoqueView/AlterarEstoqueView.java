@@ -7,7 +7,7 @@ public class AlterarEstoqueView {
     public AlterarEstoqueView(){}
 
     public Scene getScene(){
-        Scene scene = new Scene(controller.root,400,600);
+        Scene scene = new Scene(controller.root,1000,700);
         controller.initButtons();
         controller.configVbox();
         controller.box.getChildren().addAll(

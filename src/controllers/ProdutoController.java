@@ -4,6 +4,8 @@ import models.ProdutoModel;
 import models.ProdutoModel;
 import models.persistencia.BancoDeDadosLocal;
 
+import java.util.List;
+
 public class ProdutoController {
     public String mostrarProdutos(){
         BancoDeDadosLocal bd=BancoDeDadosLocal.getInstance();
@@ -11,7 +13,7 @@ public class ProdutoController {
         ProdutoModel produto;
         for(int i=0;i<bd.produtos.size();i++){
             produto=bd.produtos.get(i);
-            str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+"\n";
+            str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+", Quantidade em estoque: "+produto.getQtdEmEstoque()+"\n";
         }
 
         return str;
@@ -24,7 +26,7 @@ public class ProdutoController {
         for(int i=0;i<bd.produtos.size();i++){
             produto=bd.produtos.get(i);
             if(produto.getCategoria().equals(categoria)){
-                str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+"\n";
+                str+= "Categoria: "+produto.getCategoria()+", Descrição: "+produto.getDescricao()+", Preço unitário: R$"+produto.getPrecoUnit()+"Quantidade em estoque"+produto.getQtdEmEstoque()+"\n";
 
             }
         }
@@ -90,6 +92,7 @@ public class ProdutoController {
         }
         return null;
     }
+
 
     public boolean categoriaEhValida(String categoria){
         return !categoria.equals("");

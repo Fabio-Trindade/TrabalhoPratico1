@@ -42,7 +42,7 @@ public class RealizarVendaViewController {
     public javafx.scene.control.Label  labelNomeCliente=
             new javafx.scene.control.Label("Insira o cpf do cliente (somente números)");
     public javafx.scene.control.Button botaoProcurarCliente=
-            new  javafx.scene.control.Button("Adicionar cliente");
+            new  javafx.scene.control.Button("Procurar cliente");
     public javafx.scene.control.TextField textFieldProcurarCliente= new TextField();
     public javafx.scene.control.Label  labelClienteFoiencontrado=
             new javafx.scene.control.Label("");

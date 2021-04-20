@@ -10,7 +10,7 @@ public class ListarVendaView {
     ListarVendaViewController controller= ListarVendaViewController.getInstance();
 
     public Scene getScene(){
-        Scene scene = new Scene(controller.root,400,600);
+        Scene scene = new Scene(controller.root,1000,700);
         controller.initButtons();
         controller.getVendas();
         controller.configVbox();

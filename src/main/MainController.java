@@ -46,6 +46,9 @@ public class MainController {
 
     }
     private void initOnClicks(){
+        controllerMenuView.botaoSair.setOnAction(e->{
+            System.exit(0);
+        });
         controllerMenuView.botaoCadastrarProduto.setOnAction(e -> windows.setScene(cadastrarProdutoView));
         controllerMenuView.botaoCadastrarCliente.setOnAction(e -> windows.setScene(cadastrarClienteView));
         controllerMenuView.botaoRealizarVenda.setOnAction(e -> windows.setScene(realizarVendaView));

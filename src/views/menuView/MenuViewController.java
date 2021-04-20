@@ -26,6 +26,8 @@ public class MenuViewController {
 
     public final javafx.scene.control.Button botaoCadastrarCliente =
             new javafx.scene.control.Button("Cadastrar cliente");
+    public final javafx.scene.control.Button botaoSair =
+            new javafx.scene.control.Button("Sair");
     public final javafx.scene.control.Button botaoRealizarVenda =
             new javafx.scene.control.Button("Realizar venda");
     public final javafx.scene.control.Button botaoAlterarEstoque =
