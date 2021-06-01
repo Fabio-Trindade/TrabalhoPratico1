@@ -93,6 +93,7 @@ public class RealizarVendaViewController {
         labelErroAdcionarProduto.setText("");
         labelClienteFoiencontrado.setText("");
         qtdProdutosVendidos=0;
+        labelEnderecos.setText("");
         labelQtdProdutosVendidos.setText( qtdProdutosVendidos+" produto(s) adicionado(s)");
         cliente=null;
         produtos.clear();

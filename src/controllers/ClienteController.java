@@ -135,7 +135,7 @@ public class ClienteController {
     public String retornarEnderecos(ClienteModel cliente){
         String str="Lista de endereços:\n";int i=0;
         for (Endereco endereco : cliente.getEnderecos()){
-            str += i+"-"+endereco.getRua()+","+endereco.getBairro()+","+endereco.getNumero()+"\n";
+            str += i+"-"+endereco.getRua()+","+endereco.getBairro()+",Número "+endereco.getNumero()+"\n";
         }
         return str;
     }

@@ -27,17 +27,14 @@ public class VendaController {
             str+= "O cliente "+venda.getCliente().getNome()+" fez as seguintes compras no dia "+venda.getData()+":\n" ;
             for (int j=0;j<bd.vendas.get(i).getProdutosVendidos().size();j++){
                 produto=bd.vendas.get(i).getProdutosVendidos().get(j).getProduto();
-                if (j==(bd.vendas.get(i).getProdutosVendidos().size()-1)){
-                    str+=produto.getCategoria()+ "\n";
-                }else{
-                    str+=produto.getCategoria()+",\n";
-                }
 
-            }
+                    str +=  "Categoria: " + produto.getCategoria()+", Descrição: "+ produto.getDescricao();
+                str+=", Quantidade comprada: "+bd.vendas.get(i).getProdutosVendidos().get(j).getQuantidade()+
+                        ", Status:"+bd.vendas.get(i).getStatus().getStatus()+"\n";
+                }
 
         }
 
-        str+="\n";
 
         return str;
     }
